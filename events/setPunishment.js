@@ -8,6 +8,7 @@ const { Punished, Punisher, Punishment } = require('../classes/punish.js')
 const channels_ids = require('../libraries/channels_ids.json')
 const { Rules } = require('../libraries/rules.json');
 const { AccumulatedBanEmbed, BanEmbed, BanLogEmbed } = require('../components/embeds/ban.js');
+const Roles = require('../libraries/roles_ids.json');
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction) {
@@ -16,7 +17,13 @@ module.exports = {
             (interaction.customId !== 'approve-TEMPORAL' && interaction.customId !== 'approve-PERMANENTE')
         ) return
 
+        if (
+            !interaction.member.roles.cache.has(Roles.Admin) && !interaction.member.roles.cache.has(Roles.Supervisor) &&
+            !interaction.member.roles.cache.has(Roles.Moderator) && !interaction.member.roles.cache.has(Roles.Staff)
+        ) return
+
         interaction.deferUpdate();
+
         // Retrieving the information user object using ID inside embeded message fields.
         let _punished_discord_user = interaction.guild.members.cache.get(interaction.message.embeds[0].fields[0].value.split(' ')[0].replace(/[^0-9.]/g, ''));
 

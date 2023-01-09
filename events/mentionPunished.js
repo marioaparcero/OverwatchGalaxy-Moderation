@@ -4,6 +4,7 @@ const { ErrorEmbed } = require('../components/embeds/error');
 const { MentionEmbed } = require('../components/embeds/mention');
 const { RuleSelectMenu } = require('../components/select-menus/RuleSelectMenu');
 const { getPunishments } = require('../database/getPunishments');
+const Roles = require('../libraries/roles_ids.json');
 module.exports = {
     name: 'interactionCreate',
     execute(interaction) {
@@ -11,6 +12,11 @@ module.exports = {
             (interaction.customId !== 'rule-select-soft' && interaction.customId !== 'rule-select-serious') &&
             (interaction.customId !== 'rule-select-temporary' && interaction.customId !== 'rule-select-permanent')
         ) return;
+
+        if (
+            !interaction.member.roles.cache.has(Roles.Admin) && !interaction.member.roles.cache.has(Roles.Supervisor) &&
+            !interaction.member.roles.cache.has(Roles.Moderator) && !interaction.member.roles.cache.has(Roles.Staff)
+        ) return
 
         let _approval = {
             _title: 'SE APLICARÁ',
