@@ -1,4 +1,3 @@
-const Discord = require('discord.js');
 const Roles = require('../libraries/roles_ids.json');
 
 module.exports = {
@@ -9,7 +8,6 @@ module.exports = {
 
     const filteredRoles = member.roles.cache.filter(role => role.id != message.guild.id);
     const listedRoles = filteredRoles.sort((a, b) => b.position - a.position).map(role => role.id.toString());
-
     if (
       !listedRoles.includes(Roles.Admin) &&
       !listedRoles.includes(Roles.Moderator) &&
