@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const Roles = require('../libraries/roles_ids.json');
 
 module.exports = {
 
@@ -9,19 +10,21 @@ module.exports = {
     const filteredRoles = member.roles.cache.filter(role => role.id != message.guild.id);
     const listedRoles = filteredRoles.sort((a, b) => b.position - a.position).map(role => role.id.toString());
 
-    if (listedRoles.includes('921554511011667998') || listedRoles.includes('921551508418482196')) {
+    if (
+      !listedRoles.includes(Roles.Admin) &&
+      !listedRoles.includes(Roles.Moderator) &&
+      !listedRoles.includes(Roles.SquadLeader) &&
+      !listedRoles.includes(Roles.SquadMember)
+    ) return;
 
-      ammount = message.content.split(' ')[1];
+    ammount = message.content.split(' ')[1];
 
-      if (ammount >= 1 && ammount <= 100) {
-        message.channel.bulkDelete(ammount)
-        message.reply(`${ammount} mensajes eliminados.`).then(msg => { setTimeout(() => msg.delete(), 3000) }).catch();
-      } else {
-        return;
-      }
-
+    if (ammount >= 1 && ammount <= 100) {
+      message.channel.bulkDelete(ammount)
+      message.reply(`${ammount} mensajes eliminados.`).then(msg => { setTimeout(() => msg.delete(), 3000) }).catch();
+    } else {
+      return;
     }
-
   }
 
 }
