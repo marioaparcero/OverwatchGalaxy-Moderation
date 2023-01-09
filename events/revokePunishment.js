@@ -1,6 +1,7 @@
 const { getPunishmentById } = require('../database/getPunishments.js');
 const { deletePunishment } = require('../database/deletePunishment.js');
 const { Rules } = require('../libraries/rules.json');
+const Roles = require('../libraries/roles_ids.json');
 
 module.exports = {
 
@@ -8,7 +9,7 @@ module.exports = {
     async execute(interaction) {
         if (interaction.customId === 'revoke') {
             interaction.deferUpdate();
-            if (interaction.member.roles.cache.has('921551508418482196') || interaction.member.roles.cache.has('995107534711042149')) {
+            if (interaction.member.roles.cache.has(Roles.Admin) || interaction.member.roles.cache.has(Roles.Supervisor)) {
                 const _punishment = await getPunishmentById(interaction.message.embeds[0].fields[4].value.split(' ')[1]);
                 let _punished_discord_user = interaction.guild.members.cache.get(_punishment._punished_id);
 

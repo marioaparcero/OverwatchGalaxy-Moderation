@@ -1,6 +1,4 @@
 const Discord = require('discord.js');
-const { Client, Intents } = require('discord.js');
-const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 require('dotenv').config();
 
 const fs = require('fs');
@@ -19,14 +17,13 @@ for (const file of eventFiles) {
 	}
 }
 
-
-const express = require('express');
-const app = express();
-app.get('/', function (req, res) {
-	res.send('Express is running!');
-});
-app.listen(3000, function () {
-	console.log('Express is listening on port 3000!');
-});
+// const express = require('express');
+// const app = express();
+// app.get('/', function (req, res) {
+// 	res.send('Express is running!');
+// });
+// app.listen(3000, function () {
+// 	console.log('Express is listening on port 3000!');
+// });
 
 client.login(process.env['TOKEN']);
