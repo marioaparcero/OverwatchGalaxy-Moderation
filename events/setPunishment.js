@@ -9,6 +9,8 @@ const channels_ids = require('../libraries/channels_ids.json')
 const { Rules } = require('../libraries/rules.json');
 const { AccumulatedBanEmbed, BanEmbed, BanLogEmbed } = require('../components/embeds/ban.js');
 const Roles = require('../libraries/roles_ids.json');
+const { Role } = require('discord.js');
+const { ErrorEmbed } = require('../components/embeds/error.js');
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction) {
@@ -64,6 +66,7 @@ module.exports = {
             _rule_id = interaction.message.embeds[0].fields[1].value.split(' ')[0],
             _type = null,
             _date = new Date().toLocaleString('es-ES', { timeZone: 'CET' }),
+            _discord_timestamp = `<t:${Math.floor(Date.now() / 1000)}>`,
             _timestamp = Date.now(),
             _log_message_url = null,
         );
@@ -78,7 +81,6 @@ module.exports = {
             }
 
             let _timeout_ammount = 0;
-
             switch (_punishment_count) {
                 case 0: // 1st warning
                     _timeout_ammount = (60 * 60 * 1000);
@@ -93,7 +95,7 @@ module.exports = {
                     _timeout_ammount = ((24 * 60) * 60 * 1000);
                     break
                 case 4: // 5th warning
-                    _punishment._type = 'PERMANENTE'
+                    _punishment._type = 'PERMANENTE';
                     break
                 default:
                     break
@@ -127,10 +129,38 @@ module.exports = {
                     };
                 });
             }
-
         }
 
         let _log_channel = interaction.guild.channels.cache.get(channels_ids[interaction.customId.split('-')[1]]);
+
+        const sendBanEmbed = (_punishment) => {
+            try {
+                _punished_discord_user.send({ embeds: [BanEmbed(_punishment)], components: [UserButtonsRow] }).catch(() => {
+                    interaction.member.send({ embeds: [ErrorEmbed('No se ha podido enviar el mensaje de ban al usuario.')] })
+                })
+            } catch (error) {
+
+            }
+
+        }
+
+        const permissionCheck = async () => {
+            try {
+                if (
+                    !_punished_discord_user.roles.cache.has(Roles.Admin) &&
+                    !_punished_discord_user.roles.cache.has(Roles.Supervisor) &&
+                    !_punished_discord_user.roles.cache.has(Roles.Moderator) &&
+                    !_punished_discord_user.roles.cache.has(Roles.Staff)
+                ) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (error) {
+                return true;
+            }
+        }
+
         // Checks what type of warning is being set (soft) || (serious) then is setting the type  and the log channel where the embeded message will be sent.
         switch (interaction.customId) {
             case 'approve-LEVE':
@@ -163,35 +193,32 @@ module.exports = {
                 break
             case 'approve-TEMPORAL':
                 {
-                    const _ban_check = () => {
-                        return interaction.guild.bans.fetch(_punished_discord_user.id).catch((error) => {
-                            return {
-                                _error: error,
-                            };
-                        })
-                    }
-
-                    isBanned = await _ban_check();
-
-                    if (!isBanned._error) {
-                        interaction.member.send('El usuario ya se encuentra baneado de este servidor.').then(() => {
+                    if (await permissionCheck() !== true) {
+                        interaction.member.send('No se puede banear a un miembro del staff.').then(() => {
                             interaction.message.delete();
                         })
                         return
                     } else {
-                        _punishment._type = 'TEMPORAL'
-                        const _ban = await Ban();
+                        const _ban_check = () => {
+                            return interaction.guild.bans.fetch(_punished_discord_user.id).catch((error) => {
+                                return {
+                                    _error: error,
+                                };
+                            })
+                        }
 
-                        if (!_ban._error) {
-                            setBan(_ban).then(() => {
+                        isBanned = await _ban_check();
+
+                        if (!isBanned._error) {
+                            interaction.member.send('El usuario ya se encuentra baneado de este servidor.').then(() => {
                                 interaction.message.delete();
                             })
-                        } else if (_ban._error.code === 50013) {
-                            interaction.member.send('No se ha podido banear al usuario debido a la falta de permisos.').then(() => {
-                                interaction.message.delete();
-                            })
+                            return
                         } else {
-                            interaction.member.send('No se ha podido banear al usuario, por favor, contacta con un administrador.').then(() => {
+                            _punishment._type = 'TEMPORAL'
+                            sendBanEmbed(_punishment)
+                            const _ban = await Ban();
+                            setBan(_ban).then(() => {
                                 interaction.message.delete();
                             })
                         }
@@ -200,36 +227,45 @@ module.exports = {
                 break
             case 'approve-PERMANENTE':
                 {
-                    const _ban_check = () => {
-                        return interaction.guild.bans.fetch(_punished_discord_user.id).catch((error) => {
-                            return {
-                                _error: error,
-                            };
-                        })
-                    }
 
-                    isBanned = await _ban_check();
-                    if (!isBanned._error) {
-                        interaction.member.send('El usuario ya se encuentra baneado de este servidor.').then(() => {
+                    if (await permissionCheck() !== true) {
+                        interaction.member.send('No se puede banear a un miembro del staff.').then(() => {
                             interaction.message.delete();
                         })
                         return
                     } else {
 
-                        _punishment._type = 'PERMANENTE'
-                        const _ban = await Ban();
-                        if (!_ban._error) {
-                            setBan(_ban).then(() => {
+                        const _ban_check = () => {
+                            return interaction.guild.bans.fetch(_punished_discord_user.id).catch((error) => {
+                                return {
+                                    _error: error,
+                                };
+                            })
+                        }
+
+                        isBanned = await _ban_check();
+                        if (!isBanned._error) {
+                            interaction.member.send('El usuario ya se encuentra baneado de este servidor.').then(() => {
                                 interaction.message.delete();
                             })
-                        } else if (_ban._error.code === 50013) {
-                            interaction.member.send('No se ha podido banear al usuario debido a la falta de permisos.').then(() => {
-                                interaction.message.delete();
-                            })
+                            return
                         } else {
-                            interaction.member.send('No se ha podido banear al usuario, por favor, contacta con un administrador.').then(() => {
-                                interaction.message.delete();
-                            })
+                            _punishment._type = 'PERMANENTE'
+                            sendBanEmbed(_punishment)
+                            const _ban = await Ban();
+                            if (!_ban._error) {
+                                setBan(_ban).then(() => {
+                                    interaction.message.delete();
+                                })
+                            } else if (_ban._error.code === 50013) {
+                                interaction.member.send('No se ha podido banear al usuario debido a la falta de permisos.').then(() => {
+                                    interaction.message.delete();
+                                })
+                            } else {
+                                interaction.member.send('No se ha podido banear al usuario, por favor, contacta con un administrador.').then(() => {
+                                    interaction.message.delete();
+                                })
+                            }
                         }
                     }
                 }
@@ -252,7 +288,7 @@ module.exports = {
                     try {
                         _punished_discord_user.send({ embeds: [AccumulatedBanEmbed(_punishment)], components: [UserButtonsRow] });
                     } catch (error) {
-
+                        interaction.member.send({ embeds: [ErrorEmbed('No se ha podido enviar el mensaje de ban al usuario.')] })
                     }
                     _punished_discord_user.ban({ reason: 'Acumulación de faltas graves' })
                 })
@@ -269,12 +305,11 @@ module.exports = {
                     } catch (error) {
 
                     }
-
                 })
             }
         }
 
-        // Inserts ban as a document into DB and sends embeded message to the user that is being warned and to a log channel.
+        // Inserts ban as a document into DB and sends embeded message to a log channel.
         async function setBan(_ban) {
             await addPunishment(_punishment, _punished, _punisher).then((_id) => {
                 _punishment._id = _id.insertedId;
@@ -282,11 +317,6 @@ module.exports = {
                     _punishment._log_message_url = _message.url;
                     updatePunishment(_punishment)
                 });
-                try {
-                    _punished_discord_user.send({ embeds: [BanEmbed(_punishment)], components: [UserButtonsRow] });
-                } catch (error) {
-
-                }
             })
         }
     }

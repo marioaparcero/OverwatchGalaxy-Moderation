@@ -9,12 +9,12 @@ let BanEmbed = (_punishment) => {
         )
         .addFields(
             { name: '`📑 Norma incumplida`', value: `> ${Rules[_punishment._rule_id - 1].title}` },
-            { name: '`📅 Fecha`', value: `> ${_punishment._date}` },
+            { name: '`📅 Fecha`', value: `> ${_punishment._discord_timestamp}` },
         )
 
     if (_punishment._type == 'TEMPORAL') {
         embed.addFields(
-            { name: '`⏰ Duración hasta`', value: `> ${new Date(_punishment._timestamp + ((28 * 24 * 60) * 60 * 1000)).toLocaleDateString()}` },
+            { name: '`⏰ Duración hasta`', value: `> <t:${Math.floor((_punishment._timestamp + ((28 * 24 * 60) * 60 * 1000)) / 1000)}>` },
             { name: 'Se te permitirá volver a entrar al servidor en 28 días.', value: 'Para ser desbaneado, debes contactarnos mediante nuestra página web dentro de 28 días: https://squads.es/' },
         )
     }
@@ -27,7 +27,8 @@ let AccumulatedBanEmbed = (_punishment) => {
         .setColor('#2f3136')
         .setTitle('Has recibido un ban por acumulación de faltas graves en el servidor de SQUADS.')
         .addFields(
-            { name: '`📅 Fecha`', value: `> ${_punishment._date}` },
+            { name: '`📑 Norma incumplida`', value: `> ${Rules[_punishment._rule_id - 1].title}` },
+            { name: '`📅 Fecha`', value: `>  ${_punishment._discord_timestamp}` },
         )
 }
 
@@ -45,7 +46,7 @@ let BanLogEmbed = (_punishment, _punished, _punisher, _ban) => {
             { name: '`👮 Baneado por`', value: `> \`Discord:\` <@${_punisher._discord_id}>\n> \`Nombre:\` ${_punisher._display_name}`, inline: true },
         )
         .addFields(
-            { name: '`📅 Fecha`', value: `> ${_date}` },
+            { name: '`📅 Fecha`', value: `> ${_punishment._discord_timestamp}` },
             { name: '`📑 Norma incumplida`', value: `> ${Rules[_punishment._rule_id - 1].title}` },
             { name: '`🆔 ID del ban`', value: `> ${_punishment._id}` },
         )
@@ -59,7 +60,7 @@ let BanLogEmbed = (_punishment, _punished, _punisher, _ban) => {
 
     if (_punishment._type == 'TEMPORAL') {
         embed.addFields(
-            { name: '`⏰ Duración hasta`', value: `> ${new Date(_punishment._timestamp + ((28 * 24 * 60) * 60 * 1000)).toLocaleDateString()}` },
+            { name: '`⏰ Duración hasta`', value: `> <t:${Math.floor((_punishment._timestamp + ((28 * 24 * 60) * 60 * 1000)) / 1000)}>` },
         )
     }
 

@@ -26,7 +26,7 @@ const ApprovalEmbed = (_approval, _punished) => {
     if (_approval._history.length > 0) {
         _approval._history.forEach((punishment, index) => {
             embed.addFields(
-                { name: `\`${punishment._date}\``, value: `NORMA: **${punishment._rule_id}**\nTIPO: **${punishment._type}**\n[+INFO](${punishment._log_message_url})`, inline: true },
+                { name: `${punishment._discord_timestamp}`, value: `NORMA: **${punishment._rule_id}**\nTIPO: **${punishment._type}**\n[+INFO](${punishment._log_message_url})`, inline: true },
             )
         }
         )

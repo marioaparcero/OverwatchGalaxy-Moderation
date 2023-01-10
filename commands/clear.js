@@ -10,9 +10,9 @@ module.exports = {
     const listedRoles = filteredRoles.sort((a, b) => b.position - a.position).map(role => role.id.toString());
     if (
       !listedRoles.includes(Roles.Admin) &&
+      !listedRoles.includes(Roles.Supervisor) &&
       !listedRoles.includes(Roles.Moderator) &&
-      !listedRoles.includes(Roles.SquadLeader) &&
-      !listedRoles.includes(Roles.SquadMember)
+      !listedRoles.includes(Roles.Staff)
     ) return;
 
     ammount = message.content.split(' ')[1];

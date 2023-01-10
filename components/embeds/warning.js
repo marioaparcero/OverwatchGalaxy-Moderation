@@ -5,7 +5,7 @@ const WarningEmbed = (_punishment) => {
         .setColor('#2f3136')
         .addFields(
             { name: `Has recibido una falta en el servidor de SQUADS.`, value: `\`📚 Tipo de falta\`\n> ${_punishment._type}`, inline: true },
-            { name: '`📅 Fecha`', value: `> ${_punishment._date}` },
+            { name: '`📅 Fecha`', value: `> ${_punishment._discord_timestamp}` },
         )
         .addFields(
             { name: '`📑 Norma incumplida`', value: `> ${Rules[_punishment._rule_id - 1].title}` },
@@ -20,7 +20,7 @@ const WarningLogEmbed = async (_punishment, _punished, _punisher) => {
             { name: '`👮 Advertido por`', value: `> \`Discord:\` <@${_punisher._discord_id}>\n> \`Nombre:\` ${_punisher._display_name}`, inline: true },
         )
         .addFields(
-            { name: '`📅 Fecha`', value: `> ${_date}` },
+            { name: '`📅 Fecha`', value: `> ${_punishment._discord_timestamp}` },
             { name: '`📑 Norma incumplida`', value: `> ${Rules[_punishment._rule_id - 1].title}` },
             { name: '`🆔 ID de advertencia`', value: `> ${_punishment._id}` },
         )

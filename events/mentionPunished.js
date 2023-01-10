@@ -16,7 +16,10 @@ module.exports = {
         if (
             !interaction.member.roles.cache.has(Roles.Admin) && !interaction.member.roles.cache.has(Roles.Supervisor) &&
             !interaction.member.roles.cache.has(Roles.Moderator) && !interaction.member.roles.cache.has(Roles.Staff)
-        ) return
+        ) {
+            interaction.reply({ embeds: [ErrorEmbed('No tienes permisos para usar este menú.')], ephemeral: true });
+            return;
+        }
 
         let _approval = {
             _title: 'SE APLICARÁ',
@@ -97,7 +100,7 @@ module.exports = {
                 interaction.guild.channels.cache.get(answerMessage.content.replace(/[^0-9.]/g, ''))
             ) {
                 answerMessage.delete();
-                embed.edit({ embeds: [ErrorEmbed()] }).then(msg => {
+                embed.edit({ embeds: [ErrorEmbed('No has introducido una ID válida.')] }).then(msg => {
                     setTimeout(() => msg.delete(), 3000);
                 });
                 return

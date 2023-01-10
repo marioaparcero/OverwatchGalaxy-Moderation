@@ -12,6 +12,7 @@ module.exports = {
         _type: _punishment._type,
         _rule_id: _punishment._rule_id,
         _date: _punishment._date,
+        _discord_timestamp: _punishment._discord_timestamp,
         _timestamp: _punishment._timestamp,
       })
     } catch (err) {
