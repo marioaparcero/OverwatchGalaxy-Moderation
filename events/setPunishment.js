@@ -160,6 +160,37 @@ module.exports = {
             }
         }
 
+        // const punisherPermission = (_punishment) => {
+        //     let _permission = "NONE";
+        //     if (_punisher_discord_user.roles.cache.has(Roles.Admin)) {
+        //         _permission = "ADMIN";
+        //     }
+        //     else if (_punisher_discord_user.roles.cache.has(Roles.Supervisor)) {
+        //         _permission = "SUPERVISOR";
+        //     }
+        //     else if (_punisher_discord_user.roles.cache.has(Roles.Moderator)) {
+        //         _permission = "MODERATOR";
+        //     }
+        //     else if (_punisher_discord_user.roles.cache.has(Roles.Staff)) {
+        //         _permission = "STAFF";
+        //     }
+
+        //     if (_permission === "NONE") {
+        //         return false;
+        //     }
+        //     if (_punishment._type === "LEVE") {
+        //         return true;
+        //     }
+        //     if (_punishment._type === "GRAVE" || _punishment._type === "TEMPORAL" || _punishment._type === "PERMANENTE") {
+        //         if (_permission === "ADMIN" || _permission === "SUPERVISOR" || _permission === "MODERATOR") {
+        //             return true;
+        //         } else {
+        //             return false;
+        //         }
+        //     }
+        // }
+
+
         // Checks what type of warning is being set (soft) || (serious) then is setting the type  and the log channel where the embeded message will be sent.
         switch (interaction.customId) {
             case 'approve-LEVE':
