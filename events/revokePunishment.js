@@ -41,7 +41,7 @@ module.exports = {
                         });
 
                     } catch (error) {
-                        interaction.member.send({ content: 'No se ha podido eliminar la falta.' });
+                        interaction.member.send({ embeds: [ErrorEmbed('No se ha podido eliminar la falta')] })
                     }
                 }
 
@@ -55,16 +55,16 @@ module.exports = {
                             });
                         }).catch((error) => {
                             if (error.code === 10026) {
-                                interaction.member.send('No se ha podido desbanear al usuario, ya que no se encuentra en la lista de baneados.');
+                                interaction.member.send({ embeds: [ErrorEmbed('No se ha podido desbanear al usuario, ya que no se encuentra en la lista de baneados')] })
                             }
                         });
                     } catch (error) {
-                        interaction.member.send({ content: 'No se ha podido desbanear al usuario.' });
+                        interaction.member.send({ embeds: [ErrorEmbed('No se ha podido desbanear al usuario')] })
                     }
                 }
 
             } else {
-                interaction.member.send('No tienes permisos suficientes para quitar faltas, porfavor contácta a un @ADMINISTRADOR.');
+                interaction.member.send({ embeds: [ErrorEmbed('No tienes permisos suficientes para quitar faltas, porfavor contácta a un @ADMINISTRADOR')] })
             }
         }
 

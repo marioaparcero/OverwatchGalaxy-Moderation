@@ -9,7 +9,6 @@ const channels_ids = require('../libraries/channels_ids.json')
 const { Rules } = require('../libraries/rules.json');
 const { AccumulatedBanEmbed, BanEmbed, BanLogEmbed } = require('../components/embeds/ban.js');
 const Roles = require('../libraries/roles_ids.json');
-const { Role } = require('discord.js');
 const { ErrorEmbed } = require('../components/embeds/error.js');
 module.exports = {
     name: 'interactionCreate',
@@ -136,7 +135,7 @@ module.exports = {
         const sendBanEmbed = (_punishment) => {
             try {
                 _punished_discord_user.send({ embeds: [BanEmbed(_punishment)], components: [UserButtonsRow] }).catch(() => {
-                    interaction.member.send({ embeds: [ErrorEmbed('No se ha podido enviar el mensaje de ban al usuario.')] })
+                    interaction.member.send({ embeds: [ErrorEmbed('No se ha podido enviar el mensaje de ban al usuario')] })
                 })
             } catch (error) {
 
@@ -175,17 +174,16 @@ module.exports = {
                 {
                     _punishment._type = 'GRAVE'
                     const _warn = await Warn(_punishment._type);
-
                     if (!_warn._error) {
                         setWarning().then(() => {
                             interaction.message.delete();
                         })
                     } else if (_warn._error.code === 50013) {
-                        interaction.member.send('No se ha podido aislar al usuario debido a la falta de permisos.').then(() => {
+                        interaction.member.send({ embeds: [ErrorEmbed('No se ha podido aplicar la falta debido a la falta de permisos')] }).then(() => {
                             interaction.message.delete();
                         })
                     } else {
-                        interaction.member.send('No se ha podido aislar al usuario, por favor, contacta con un administrador.').then(() => {
+                        interaction.member.send({ embeds: [ErrorEmbed('No se ha podido aplicar la falta, razón desconocida')] }).then(() => {
                             interaction.message.delete();
                         })
                     }
@@ -194,7 +192,7 @@ module.exports = {
             case 'approve-TEMPORAL':
                 {
                     if (await permissionCheck() !== true) {
-                        interaction.member.send('No se puede banear a un miembro del staff.').then(() => {
+                        interaction.member.send({ embeds: [ErrorEmbed('No se puede aplicar ban a los miembros del STAFF')] }).then(() => {
                             interaction.message.delete();
                         })
                         return
@@ -210,7 +208,7 @@ module.exports = {
                         isBanned = await _ban_check();
 
                         if (!isBanned._error) {
-                            interaction.member.send('El usuario ya se encuentra baneado de este servidor.').then(() => {
+                            interaction.member.send({ embeds: [ErrorEmbed(`El usuario ya se encuentra baneado en el servidor ${interaction.guild.name}`)] }).then(() => {
                                 interaction.message.delete();
                             })
                             return
@@ -218,9 +216,19 @@ module.exports = {
                             _punishment._type = 'TEMPORAL'
                             sendBanEmbed(_punishment)
                             const _ban = await Ban();
-                            setBan(_ban).then(() => {
-                                interaction.message.delete();
-                            })
+                            if (!_ban._error) {
+                                setBan(_ban).then(() => {
+                                    interaction.message.delete();
+                                })
+                            } else if (_ban._error.code === 50013) {
+                                interaction.member.send({ embeds: [ErrorEmbed('No se ha podido aplicar el ban debido a la falta de permisos')] }).then(() => {
+                                    interaction.message.delete();
+                                })
+                            } else {
+                                interaction.member.send({ embeds: [ErrorEmbed('No se ha podido aplicar el ban, razón desconocida')] }).then(() => {
+                                    interaction.message.delete();
+                                })
+                            }
                         }
                     }
                 }
@@ -229,7 +237,7 @@ module.exports = {
                 {
 
                     if (await permissionCheck() !== true) {
-                        interaction.member.send('No se puede banear a un miembro del staff.').then(() => {
+                        interaction.member.send({ embeds: [ErrorEmbed('No se puede aplicar ban a los miembros del STAFF')] }).then(() => {
                             interaction.message.delete();
                         })
                         return
@@ -245,7 +253,7 @@ module.exports = {
 
                         isBanned = await _ban_check();
                         if (!isBanned._error) {
-                            interaction.member.send('El usuario ya se encuentra baneado de este servidor.').then(() => {
+                            interaction.member.send({ embeds: [ErrorEmbed(`El usuario ya se encuentra baneado en el servidor ${interaction.guild.name}`)] }).then(() => {
                                 interaction.message.delete();
                             })
                             return
@@ -258,11 +266,11 @@ module.exports = {
                                     interaction.message.delete();
                                 })
                             } else if (_ban._error.code === 50013) {
-                                interaction.member.send('No se ha podido banear al usuario debido a la falta de permisos.').then(() => {
+                                interaction.member.send({ embeds: [ErrorEmbed('No se ha podido aplicar el ban debido a la falta de permisos')] }).then(() => {
                                     interaction.message.delete();
                                 })
                             } else {
-                                interaction.member.send('No se ha podido banear al usuario, por favor, contacta con un administrador.').then(() => {
+                                interaction.member.send({ embeds: [ErrorEmbed('No se ha podido banear al usuario, razón desconocida')] }).then(() => {
                                     interaction.message.delete();
                                 })
                             }
