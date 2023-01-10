@@ -1,11 +1,11 @@
 const Discord = require('discord.js');
 const { Rules } = require('../../libraries/rules.json')
 
-let BanEmbed = (_punishment) => {
+let BanEmbed = (_punishment, _server_name) => {
     let embed = new Discord.MessageEmbed()
         .setColor('#2f3136')
         .addFields(
-            { name: `Has recibido un ban en el servidor de SQUADS.`, value: `\`📚 Tipo de ban\`\n${_punishment._type}`, inline: true },
+            { name: `Has recibido un ban en el servidor de ${_server_name}`, value: `\`📚 Tipo de ban\`\n${_punishment._type}`, inline: true },
         )
         .addFields(
             { name: '`📑 Norma incumplida`', value: `> ${Rules[_punishment._rule_id - 1].title}` },
@@ -22,10 +22,10 @@ let BanEmbed = (_punishment) => {
     return embed;
 }
 
-let AccumulatedBanEmbed = (_punishment) => {
+let AccumulatedBanEmbed = (_punishment, _server_name) => {
     return new Discord.MessageEmbed()
         .setColor('#2f3136')
-        .setTitle('Has recibido un ban por acumulación de faltas graves en el servidor de SQUADS.')
+        .setTitle(`Has recibido un ban por acumulación de faltas graves en el servidor de ${_server_name}`)
         .addFields(
             { name: '`📑 Norma incumplida`', value: `> ${Rules[_punishment._rule_id - 1].title}` },
             { name: '`📅 Fecha`', value: `>  ${_punishment._discord_timestamp}` },

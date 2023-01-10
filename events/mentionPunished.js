@@ -116,7 +116,7 @@ module.exports = {
             if (_punishments) {
                 _punishments.forEach(_punishment => {
                     _approval._history.push({
-                        _date: _punishment._date,
+                        _discord_timestamp: _punishment._discord_timestamp,
                         _rule_id: _punishment._rule_id,
                         _type: _punishment._type,
                         _log_message_url: _punishment._log_message_url,

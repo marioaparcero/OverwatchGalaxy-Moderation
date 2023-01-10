@@ -25,6 +25,7 @@ module.exports = {
 
         interaction.deferUpdate();
 
+        const _server_name = interaction.guild.name;
         // Retrieving the information user object using ID inside embeded message fields.
         let _punished_discord_user = interaction.guild.members.cache.get(interaction.message.embeds[0].fields[0].value.split(' ')[0].replace(/[^0-9.]/g, ''));
 
@@ -134,7 +135,7 @@ module.exports = {
 
         const sendBanEmbed = (_punishment) => {
             try {
-                _punished_discord_user.send({ embeds: [BanEmbed(_punishment)], components: [UserButtonsRow] }).catch(() => {
+                _punished_discord_user.send({ embeds: [BanEmbed(_punishment, _server_name)], components: [UserButtonsRow] }).catch(() => {
                     interaction.member.send({ embeds: [ErrorEmbed('No se ha podido enviar el mensaje de ban al usuario')] })
                 })
             } catch (error) {
@@ -325,7 +326,7 @@ module.exports = {
                         updatePunishment(_punishment)
                     });
                     try {
-                        _punished_discord_user.send({ embeds: [AccumulatedBanEmbed(_punishment)], components: [UserButtonsRow] });
+                        _punished_discord_user.send({ embeds: [AccumulatedBanEmbed(_punishment, _server_name)], components: [UserButtonsRow] });
                     } catch (error) {
                         interaction.member.send({ embeds: [ErrorEmbed('No se ha podido enviar el mensaje de ban al usuario.')] })
                     }
@@ -340,7 +341,7 @@ module.exports = {
                         updatePunishment(_punishment)
                     });
                     try {
-                        _punished_discord_user.send({ embeds: [WarningEmbed(_punishment)], components: [UserButtonsRow] });
+                        _punished_discord_user.send({ embeds: [WarningEmbed(_punishment, _server_name)], components: [UserButtonsRow] });
                     } catch (error) {
 
                     }

@@ -1,10 +1,10 @@
 const { MessageEmbed } = require('discord.js');
 const { Rules } = require('../../libraries/rules.json')
-const WarningEmbed = (_punishment) => {
+const WarningEmbed = (_punishment, _server_name) => {
     return new MessageEmbed()
         .setColor('#2f3136')
         .addFields(
-            { name: `Has recibido una falta en el servidor de SQUADS.`, value: `\`📚 Tipo de falta\`\n> ${_punishment._type}`, inline: true },
+            { name: `Has recibido una falta en el servidor de ${_server_name}`, value: `\`📚 Tipo de falta\`\n> ${_punishment._type}`, inline: true },
             { name: '`📅 Fecha`', value: `> ${_punishment._discord_timestamp}` },
         )
         .addFields(
