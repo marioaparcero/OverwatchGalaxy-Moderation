@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 const ApprovalEmbed = (_approval, _punished) => {
 
@@ -15,7 +15,7 @@ const ApprovalEmbed = (_approval, _punished) => {
         }
     }
 
-    let embed = new MessageEmbed()
+    let embed = new EmbedBuilder()
         .setColor('#2f3136')
         .addFields(
             { name: `\`${_approval._title} ${_approval._type} A:\``, value: `<@${_punished.id}>` },

@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const { Rules } = require('../../libraries/rules.json')
 
 let BanEmbed = (_punishment, _server_name) => {
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
         .setColor('#2f3136')
         .addFields(
             { name: `Has recibido un ban en el servidor de ${_server_name}`, value: `\`📚 Tipo de ban\`\n${_punishment._type}`, inline: true },
@@ -23,7 +23,7 @@ let BanEmbed = (_punishment, _server_name) => {
 }
 
 let AccumulatedBanEmbed = (_punishment, _server_name) => {
-    return new Discord.MessageEmbed()
+    return new Discord.EmbedBuilder()
         .setColor('#2f3136')
         .setTitle(`Has recibido un ban por acumulación de faltas graves en el servidor de ${_server_name}`)
         .addFields(
@@ -39,7 +39,7 @@ let BanLogEmbed = (_punishment, _punished, _punisher, _ban) => {
         _tracker_field.value = "> No disponible";
     };
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
         .setColor('#2f3136')
         .addFields(
             { name: '`👤 Miembro baneado`', value: `> \`Discord:\` <@${_punished._discord_id}>\n> \`Discord_ID:\` ${_punished._discord_id}\n> \`Nombre:\` ${_punished._display_name}`, inline: true },

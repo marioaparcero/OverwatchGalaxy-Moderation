@@ -1,6 +1,6 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 let MentionEmbed = (_punishment, _selected_type) => {
-    let embed = new MessageEmbed()
+    let embed = new EmbedBuilder()
         .setColor('#2f3136')
         .addFields(
             { name: `${_selected_type}`, value: `Menciona al usuario a sancionar con @`, inline: true },

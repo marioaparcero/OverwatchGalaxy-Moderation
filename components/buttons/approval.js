@@ -1,4 +1,4 @@
-const { MessageActionRow, MessageButton } = require('discord.js');
+const { ButtonBuilder, ActionRowBuilder } = require('discord.js');
 
 const ApprovalButtons = (_punishment_type, _emoji, _label) => {
 
@@ -18,14 +18,14 @@ const ApprovalButtons = (_punishment_type, _emoji, _label) => {
         default:
             break;
     }
-    return new MessageActionRow()
+    return new ActionRowBuilder()
         .addComponents(
-            new MessageButton()
+            new ButtonBuilder()
                 .setCustomId(`approve-${_punishment_type}`)
                 .setLabel(`${_label}`)
                 .setEmoji(`${_emoji}`)
                 .setStyle('SECONDARY'),
-            new MessageButton()
+            new ButtonBuilder()
                 .setCustomId(`cancel-punuishment`)
                 .setLabel('Cancelar')
                 .setEmoji('<:CANCELAR_DANGER:1059188966416470207>')

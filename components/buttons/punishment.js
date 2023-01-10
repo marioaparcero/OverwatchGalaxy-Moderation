@@ -1,27 +1,27 @@
-const { MessageActionRow, MessageButton } = require('discord.js');
+const { ButtonBuilder, ActionRowBuilder } = require('discord.js');
 
-let LogButtonsRow = new MessageActionRow()
+let LogButtonsRow = new ActionRowBuilder()
     .addComponents(
-        new MessageButton()
+        new ButtonBuilder()
             .setCustomId('revoke')
             .setLabel('REVERTIR')
             .setEmoji('🔙')
-            .setStyle('DANGER'),
-        new MessageButton()
+            .setStyle('Danger'),
+        new ButtonBuilder()
             .setCustomId('add-note')
             .setLabel('AÑADIR NOTA')
             .setEmoji('📝')
-            .setStyle('SUCCESS'),
-        new MessageButton()
+            .setStyle('Success'),
+        new ButtonBuilder()
             .setLabel('🔨 IR A MODERACIÓN')
             .setURL('https://discord.com/channels/758049294023524423/928329689699856514')
-            .setStyle('LINK'),
+            .setStyle('Link'),
     );
-let UserButtonsRow = new MessageActionRow()
+let UserButtonsRow = new ActionRowBuilder()
     .addComponents(
-        new MessageButton()
+        new ButtonBuilder()
             .setLabel('APELAR')
             .setURL('https://squads.es/')
-            .setStyle('LINK'),
+            .setStyle('Link'),
     );
 module.exports = { LogButtonsRow, UserButtonsRow };

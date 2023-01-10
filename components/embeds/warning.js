@@ -1,7 +1,7 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const { Rules } = require('../../libraries/rules.json')
 const WarningEmbed = (_punishment, _server_name) => {
-    return new MessageEmbed()
+    return new EmbedBuilder()
         .setColor('#2f3136')
         .addFields(
             { name: `Has recibido una falta en el servidor de ${_server_name}`, value: `\`📚 Tipo de falta\`\n> ${_punishment._type}`, inline: true },
@@ -13,7 +13,7 @@ const WarningEmbed = (_punishment, _server_name) => {
 }
 
 const WarningLogEmbed = async (_punishment, _punished, _punisher) => {
-    let embed = new MessageEmbed()
+    let embed = new EmbedBuilder()
         .setColor('#2f3136')
         .addFields(
             { name: '`👤 Miembro advertido`', value: `> \`Discord:\` <@${_punished._discord_id}>\n> \`Discord_ID:\` ${_punished._discord_id}\n> \`Nombre:\` ${_punished._display_name}`, inline: true },

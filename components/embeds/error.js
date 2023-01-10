@@ -1,6 +1,6 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const ErrorEmbed = (_message) => {
-    let embed = new MessageEmbed()
+    let embed = new EmbedBuilder()
         .setColor('#2f3136')
         .addFields(
             { name: 'Error', value: `${_message}`, inline: true },

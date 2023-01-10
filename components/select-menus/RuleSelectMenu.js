@@ -1,4 +1,4 @@
-const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+const { ActionRowBuilder, StringSelectMenuBuilder } = require('discord.js');
 const { Rules } = require('../../libraries/rules.json');
 
 let rulesArray = [];
@@ -13,16 +13,16 @@ Rules.forEach(rule => {
 });
 
 const RuleSelectMenu = (_punishment_type) => {
-    return new MessageActionRow()
+    return new ActionRowBuilder()
         .addComponents(
-            new MessageSelectMenu()
+            new StringSelectMenuBuilder()
                 .setCustomId(`rule-select-${_punishment_type}`)
                 .setPlaceholder(`${_punishment_type == 'soft' ?
                     'LEVE' : _punishment_type == 'serious' ?
                         'GRAVE' : _punishment_type == 'temporary' ?
                             'TEMPORAL' : 'PERMANENTE'
                     }`)
-                .addOptions([rulesArray]),
+                .addOptions([...rulesArray]),
         );
 }
 
