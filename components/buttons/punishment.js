@@ -7,6 +7,10 @@ let LogButtonsRow = new MessageActionRow()
             .setLabel('REVERTIR')
             .setStyle('DANGER'),
         new MessageButton()
+            .setCustomId('add-note')
+            .setLabel('AÑADIR NOTA')
+            .setStyle('SUCCESS'),
+        new MessageButton()
             .setLabel('IR A MODERACIÓN 🔨')
             .setURL('https://discord.com/channels/758049294023524423/928329689699856514')
             .setStyle('LINK'),
