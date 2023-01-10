@@ -5,13 +5,15 @@ let LogButtonsRow = new MessageActionRow()
         new MessageButton()
             .setCustomId('revoke')
             .setLabel('REVERTIR')
+            .setEmoji('🔙')
             .setStyle('DANGER'),
         new MessageButton()
             .setCustomId('add-note')
             .setLabel('AÑADIR NOTA')
+            .setEmoji('📝')
             .setStyle('SUCCESS'),
         new MessageButton()
-            .setLabel('IR A MODERACIÓN 🔨')
+            .setLabel('🔨 IR A MODERACIÓN')
             .setURL('https://discord.com/channels/758049294023524423/928329689699856514')
             .setStyle('LINK'),
     );
