@@ -85,14 +85,12 @@ module.exports = {
 
         interaction.channel.permissionOverwrites.create(interaction.user.id, { SendMessages: true });
 
+        // Filter to only accept messages from the user who used the command, the m.author.id only works inside awaitMessages as a filter.
         const msg_filter = (m) => m.author.id === interaction.member.id;
         interaction.channel.awaitMessages({ filter: msg_filter, max: 1 }).then(async collected => {
-
             interaction.channel.permissionOverwrites.edit(interaction.guild.roles.everyone.id, { ViewChannel: false, ReadMessageHistory: false });
             interaction.channel.permissionOverwrites.delete(interaction.user.id, { SendMessages: false });
-
             const embed = await interaction.channel.messages.fetch(_embed_message_id);
-
             answerMessage = collected.first();
             _punished = answerMessage.mentions.users.first();
             if (!_punished) {

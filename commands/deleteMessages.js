@@ -18,6 +18,7 @@ module.exports = {
         interaction.channel.bulkDelete(ammount)
         interaction.reply({ content: `${ammount} mensajes eliminados.`, ephemeral: true })
       } else {
+        interaction.reply({ content: 'La cantidad de mensajes a borrar debe ser mayor a 1 y menor a 100.', ephemeral: true })
         return;
       }
     } catch (error) {
