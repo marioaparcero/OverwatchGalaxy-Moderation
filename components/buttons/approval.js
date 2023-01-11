@@ -24,13 +24,12 @@ const ApprovalButtons = (_punishment_type, _emoji, _label) => {
                 .setCustomId(`approve-${_punishment_type}`)
                 .setLabel(`${_label}`)
                 .setEmoji(`${_emoji}`)
-                .setStyle('SECONDARY'),
+                .setStyle('Secondary'),
             new ButtonBuilder()
                 .setCustomId(`cancel-punuishment`)
                 .setLabel('Cancelar')
                 .setEmoji('<:CANCELAR_DANGER:1059188966416470207>')
-                .setStyle('SECONDARY'),
-
+                .setStyle('Secondary'),
         );
 }
 

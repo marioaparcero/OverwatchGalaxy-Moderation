@@ -5,6 +5,7 @@ const { MentionEmbed } = require('../components/embeds/mention');
 const { RuleSelectMenu } = require('../components/select-menus/RuleSelectMenu');
 const { getPunishments } = require('../database/getPunishments');
 const Roles = require('../libraries/roles_ids.json');
+const { PermissionsBitField } = require('discord.js');
 module.exports = {
     name: 'interactionCreate',
     execute(interaction) {
@@ -80,35 +81,34 @@ module.exports = {
             _embed_message_id = msg.id;
         });
 
-        setTimeout(() => interaction.channel.permissionOverwrites.edit(interaction.guild.roles.everyone.id, { VIEW_CHANNEL: true, READ_MESSAGE_HISTORY: false }), 1000);
+        setTimeout(() => interaction.channel.permissionOverwrites.edit(interaction.guild.roles.everyone.id, { ViewChannel: true, ReadMessageHistory: false }), 1000);
 
-        interaction.channel.permissionOverwrites.create(interaction.user.id, { SEND_MESSAGES: true });
+        interaction.channel.permissionOverwrites.create(interaction.user.id, { SendMessages: true });
 
-        const msg_filter = (m) => m.author.id === interaction.user.id;
+        const msg_filter = (m) => m.author.id === interaction.member.id;
         interaction.channel.awaitMessages({ filter: msg_filter, max: 1 }).then(async collected => {
 
-            interaction.channel.permissionOverwrites.edit(interaction.guild.roles.everyone.id, { VIEW_CHANNEL: false, READ_MESSAGE_HISTORY: false });
-            interaction.channel.permissionOverwrites.delete(interaction.user.id, { SEND_MESSAGES: false });
+            interaction.channel.permissionOverwrites.edit(interaction.guild.roles.everyone.id, { ViewChannel: false, ReadMessageHistory: false });
+            interaction.channel.permissionOverwrites.delete(interaction.user.id, { SendMessages: false });
 
             const embed = await interaction.channel.messages.fetch(_embed_message_id);
 
             answerMessage = collected.first();
             _punished = answerMessage.mentions.users.first();
-            if (answerMessage.content.replace(/[^0-9.]/g, '') === '' ||
-                answerMessage.content.replace(/[^0-9.]/g, '').length < 17 ||
-                answerMessage.content.replace(/[^0-9.]/g, '').length > 19 ||
-                interaction.guild.channels.cache.get(answerMessage.content.replace(/[^0-9.]/g, ''))
-            ) {
-                answerMessage.delete();
-                embed.edit({ embeds: [ErrorEmbed('No has introducido una ID válida.')] }).then(msg => {
-                    setTimeout(() => msg.delete(), 3000);
-                });
-                return
-            }
-
             if (!_punished) {
-                _punished = {
-                    id: answerMessage.content.replace(/[^0-9.]/g, '')
+                if (answerMessage.content.replace(/[^0-9.]/g, '') === '' ||
+                    answerMessage.content.replace(/[^0-9.]/g, '').length !== 18 ||
+                    interaction.guild.channels.cache.get(answerMessage.content.replace(/[^0-9.]/g, ''))
+                ) {
+                    answerMessage.delete();
+                    embed.edit({ embeds: [ErrorEmbed('No has introducido una ID válida.')] }).then(msg => {
+                        setTimeout(() => msg.delete(), 3000);
+                    });
+                    return
+                } else {
+                    _punished = {
+                        id: answerMessage.content.replace(/[^0-9.]/g, '')
+                    }
                 }
             }
 
