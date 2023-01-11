@@ -8,20 +8,22 @@ const { Punished, Punisher, Punishment } = require('../classes/punish.js')
 const channels_ids = require('../libraries/channels_ids.json')
 const { Rules } = require('../libraries/rules.json');
 const { AccumulatedBanEmbed, BanEmbed, BanLogEmbed } = require('../components/embeds/ban.js');
-const Roles = require('../libraries/roles_ids.json');
+const Roles = require('../libraries/roles.json');
 const { ErrorEmbed } = require('../components/embeds/error.js');
+const { checkPermissions } = require('../functions/checkPermissions.js');
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction) {
         if (
             (interaction.customId !== 'approve-LEVE' && interaction.customId !== 'approve-GRAVE') &&
             (interaction.customId !== 'approve-TEMPORAL' && interaction.customId !== 'approve-PERMANENTE')
-        ) return
+        ) return;
 
-        if (
-            !interaction.member.roles.cache.has(Roles.Admin) && !interaction.member.roles.cache.has(Roles.Supervisor) &&
-            !interaction.member.roles.cache.has(Roles.Moderator) && !interaction.member.roles.cache.has(Roles.Staff)
-        ) return
+        let rangePermission = 4; // 4 = Administrator - Staff, 3 = Admin - Moderator, 2 = Admin - Supervisor, 1 = Admin, 0 = None
+        if (!await checkPermissions(interaction.member._roles, rangePermission)) {
+            interaction.reply({ content: 'No tienes permisos para aprobar faltas o baneos', ephemeral: true })
+            return;
+        }
 
         interaction.deferUpdate();
 

@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js')
-
+const { checkPermissions } = require('../functions/checkPermissions');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('borrar')
@@ -13,6 +13,10 @@ module.exports = {
 
   async execute(interaction) {
     try {
+      if (!await checkPermissions(interaction.member._roles, 4)) {
+        interaction.reply({ content: 'No tienes permisos para ejecutar este comando!', ephemeral: true })
+        return;
+      }
       let ammount = interaction.options.getNumber('cantidad')
       if (ammount >= 1 && ammount <= 100) {
         interaction.channel.bulkDelete(ammount)

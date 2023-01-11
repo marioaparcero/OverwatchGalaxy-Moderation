@@ -1,6 +1,7 @@
 const { RuleSelectMenu } = require('../components/select-menus/RuleSelectMenu');
-const Roles = require('../libraries/roles_ids.json');
+const Roles = require('../libraries/roles.json');
 const { SlashCommandBuilder } = require('discord.js')
+const { checkPermissions } = require('../functions/checkPermissions');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -9,20 +10,23 @@ module.exports = {
 
     async execute(interaction) {
         try {
-            const filteredRoles = interaction.guild.roles.cache.filter(role => role.id != interaction.guild.id);
-            const listedRoles = filteredRoles.sort((a, b) => b.position - a.position).map(role => role.id.toString());
-            if (listedRoles.includes(Roles.Admin) || listedRoles.includes(Roles.Supervisor)) {
-                interaction.channel.send({ components: [RuleSelectMenu('soft')], files: ['assets/FALTAS.png'] }).then(() => {
-                    interaction.channel.send({ components: [RuleSelectMenu('serious')] }).then(() => {
-                        interaction.channel.send({ components: [RuleSelectMenu('temporary')], files: ['assets/BANEOS.png'] }).then(() => {
-                            interaction.channel.send({ components: [RuleSelectMenu('permanent')] }).then(() => {
-                                interaction.reply({ content: 'Panel generado con éxito.', ephemeral: true })
-                            });
+
+            if (!await checkPermissions(interaction.member._roles, 1)) {
+                interaction.reply({ content: 'No tienes permisos para ejecutar este comando!', ephemeral: true })
+                return;
+            }
+            interaction.channel.send({ components: [RuleSelectMenu('soft')], files: ['assets/FALTAS.png'] }).then(() => {
+                interaction.channel.send({ components: [RuleSelectMenu('serious')] }).then(() => {
+                    interaction.channel.send({ components: [RuleSelectMenu('temporary')], files: ['assets/BANEOS.png'] }).then(() => {
+                        interaction.channel.send({ components: [RuleSelectMenu('permanent')] }).then(() => {
+                            interaction.reply({ content: 'Panel generado con éxito.', ephemeral: true })
                         });
                     });
-                })
-            }
+                });
+            })
+
         } catch (error) {
+            console.log(error);
             interaction.reply({ content: 'Ha habido un error mientras se ejecutaba este comando!', ephemeral: true })
         }
     },

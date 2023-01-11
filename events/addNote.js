@@ -1,4 +1,3 @@
-const { noteModal } = require('../components/modals/note')
 const { InteractionType, EmbedBuilder } = require('discord.js')
 
 module.exports = {
@@ -15,7 +14,7 @@ module.exports = {
         const noteIndex = () => {
             let index = 0
             for (let i = 0; i < originalEmbed.fields.length; i++) {
-                if (originalEmbed.fields[i].name === '📝 Nota') {
+                if (originalEmbed.fields[i].name === '\`📝 Nota\`') {
                     index = i
                 } else {
                     index = 0
