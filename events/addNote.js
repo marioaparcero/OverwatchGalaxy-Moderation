@@ -25,7 +25,7 @@ module.exports = {
         }
 
         if (noteIndex() != 0) {
-            const embedWithNote = new EmbedBuilder(originalEmbed).spliceFields(noteIndex(), 1, { name: `📝 Nota`, value: `> Autor: ${interaction.member}\n> \`${note}\`` })
+            const embedWithNote = new EmbedBuilder(originalEmbed).spliceFields(noteIndex(), 1, { name: `\`📝 Nota\``, value: `> Autor: ${interaction.member}\n>>> \`${note}\`` })
             interaction.message.edit({
                 embeds: [embedWithNote]
             }).then(() => {
@@ -35,7 +35,7 @@ module.exports = {
                 })
             })
         } else {
-            const embedWithNote = new EmbedBuilder(originalEmbed).addFields({ name: `📝 Nota`, value: `> Autor: ${interaction.member}\n> \`${note}\`` })
+            const embedWithNote = new EmbedBuilder(originalEmbed).addFields({ name: `\`📝 Nota\``, value: `> Autor: ${interaction.member}\n>>> \`${note}\`` })
             interaction.message.edit({
                 embeds: [embedWithNote]
             }).then(() => {

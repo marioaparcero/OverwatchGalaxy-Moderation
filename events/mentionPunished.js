@@ -5,7 +5,6 @@ const { MentionEmbed } = require('../components/embeds/mention');
 const { RuleSelectMenu } = require('../components/select-menus/RuleSelectMenu');
 const { getPunishments } = require('../database/getPunishments');
 const Roles = require('../libraries/roles_ids.json');
-const { PermissionsBitField } = require('discord.js');
 module.exports = {
     name: 'interactionCreate',
     execute(interaction) {
@@ -91,8 +90,8 @@ module.exports = {
             interaction.channel.permissionOverwrites.edit(interaction.guild.roles.everyone.id, { ViewChannel: false, ReadMessageHistory: false });
             interaction.channel.permissionOverwrites.delete(interaction.user.id, { SendMessages: false });
             const embed = await interaction.channel.messages.fetch(_embed_message_id);
-            answerMessage = collected.first();
-            _punished = answerMessage.mentions.users.first();
+            let answerMessage = collected.first();
+            let _punished = answerMessage.mentions.users.first();
             if (!_punished) {
                 if (answerMessage.content.replace(/[^0-9.]/g, '') === '' ||
                     answerMessage.content.replace(/[^0-9.]/g, '').length !== 18 ||
