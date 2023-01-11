@@ -1,4 +1,4 @@
-![alt text](https://user-images.githubusercontent.com/76233860/129943828-f084737f-5318-4012-972a-4ef251704b1f.png)
+![alt text](https://cdn.discordapp.com/attachments/901009468807065643/1062741005536874516/image.png)
 > Squads Moderation simplifies and fastens moderation on a Discord server.<br>
 
 > The way we archieve this is by generating a panel that only staff members can use, on this panel a staff member can set warnings, set timeouts, set temporary bans and set permanent bans.<br>
