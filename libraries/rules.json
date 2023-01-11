@@ -2,122 +2,122 @@
     "Rules": [
         {
             "id": 1,
-            "emoji": "<:NORMAS:1058142464499793991>",
-            "title": "Se debe seguir el código de conducta marcado por UBISOFT, DISCORD y FACEIT",
+            "emoji": "1️⃣",
+            "title": "Se debe seguir el código de conducta marcado por Blizzard y Discord",
             "subtitle": "",
-            "description": "Incumplimiento del código de conducta de UBISOFT o DISCORD"
+            "description": "Incumplimiento del código de conducta de Blizzard y Discord"
         },
         {
             "id": 2,
-            "emoji": "<:NORMAS:1058142464499793991>",
+            "emoji": "<:NORMA:1062068758287491193>",
             "title": "No está permitido abrir MD al STAFF para resolver problemas o dudas",
-            "subtitle": "Los problemas/dudas se resuelven en los canales de soporte o en https://squads.es",
+            "subtitle": "Los problemas/dudas se resuelven en los canales de soporte o en https://comunidadoverwatch.com",
             "description": "Abrir MD a un miembro del STAFF para resolver problemas o dudas"
         },
         {
             "id": 3,
-            "emoji": "<:NORMAS:1058142464499793991>",
+            "emoji": "<:NORMA:1062068758287491193>",
             "title": "No está permitido reportar falsamente a un miembro del servidor",
             "subtitle": "En SQUADS los reportes se toman seriamente, por lo que un reporte falso puede tener consecuencias negativas para el servidor",
             "description": "Reportar falsamente a un miembro del servidor"
         },
         {
             "id": 4,
-            "emoji": "<:NORMAS:1058142464499793991>",
+            "emoji": "<:NORMA:1062068758287491193>",
             "title": "No están permitidas las multicuentas de Discord para evadir sanciones",
             "subtitle": "Las multicuentas repercuten negativamente en el servidor, ya que pueden ser utilizadas para evadir sanciones y seguir generando problemas",
             "description": "Utilizar una multicuenta de Discord"
         },
         {
             "id": 5,
-            "emoji": "<:NORMAS:1058142464499793991>",
+            "emoji": "<:NORMA:1062068758287491193>",
             "title": "No está permitido el comportamiento tóxico o la discriminación",
             "subtitle": "Por ejemplo: Insultos, Mentiras, Menosprecio, Racismo, Sexismo, Homofobia o Acoso",
             "description": "Comportamiento tóxico o discriminación"
         },
         {
             "id": 6,
-            "emoji": "<:NORMAS:1058142464499793991>",
+            "emoji": "<:NORMA:1062068758287491193>",
             "title": "No está permitido enviar/hacer spam en el servidor o a miembros del servidor",
             "subtitle": "Por ejemplo: invitaciones a otros servidores, enlaces de youtube, twitch, estafas etc...",
             "description": "Envíar o hacer spam en el servidor o a miembros del servidor"
         },
         {
             "id": 7,
-            "emoji": "<:NORMAS:1058142464499793991>",
+            "emoji": "<:NORMA:1062068758287491193>",
             "title": "No está permitida la apología de dictaduras, dictadores o grupos extremistas",
             "subtitle": "",
             "description": "Apología de dictaduras, dictadores o grupos extremistas"
         },
         {
             "id": 8,
-            "emoji": "<:NORMAS:1058142464499793991>",
+            "emoji": "<:NORMA:1062068758287491193>",
             "title": "No está permitido publicar mensajes fuera de los canales designados",
-            "subtitle": "Si tienes dudas sobre el uso de los canales, puedes pedir ayuda en https://squads.es",
+            "subtitle": "Si tienes dudas sobre el uso de los canales, puedes pedir ayuda en Tickets",
             "description": "Publicar mensajes fuera de los canales designados"
         },
         {
             "id": 9,
-            "emoji": "<:NORMAS:1058142464499793991>",
+            "emoji": "<:NORMA:1062068758287491193>",
             "title": "No está permitido el contenido político, racial, sexual u ofensivo",
             "subtitle": "",
             "description": "Publicar contenido político, racial, sexual u ofensivo"
         },
         {
             "id": 10,
-            "emoji": "<:NORMAS:1058142464499793991>",
+            "emoji": "<:NORMA:1062068758287491193>",
             "title": "No está permitido gritar o hacer ruido en las salas de voz",
             "subtitle": "Este servidor se basa en la comunicación y el respeto, por lo que no está permitido gritar o hacer ruido",
             "description": "Gritar o hacer ruido en las salas de voz"
         },
         {
             "id": 11,
-            "emoji": "<:NORMAS:1058142464499793991>",
+            "emoji": "<:NORMA:1062068758287491193>",
             "title": "No está permitido abandonar una sala de voz en mitad de una partida",
             "subtitle": "Abandonar una sala de voz en mitad de una partida puede tener consecuencias negativas en el juego, por lo que se necesita un motivo comprensible",
             "description": "Abandonar una sala de voz en mitad de una partida sin motivo comprensible"
         },
         {
             "id": 12,
-            "emoji": "<:NORMAS:1058142464499793991>",
+            "emoji": "<:NORMA:1062068758287491193>",
             "title": "No está permitido salirse de una partida en marcha",
             "subtitle": "Para abandonar una partida en marcha se necesita un motivo comprensible",
             "description": "Salirse de una partida en marcha sin motivo comprensible"
         },
         {
             "id": 13,
-            "emoji": "<:NORMAS:1058142464499793991>",
+            "emoji": "<:NORMA:1062068758287491193>",
             "title": "No está permitido hacer TEAM KILL",
             "subtitle": "El TEAM KILL está permitido únicamente si el miembro en cuestión ha dejado ordenes claras de hacerlo",
             "description": "Hacer TEAM KILL"
         },
         {
             "id": 14,
-            "emoji": "<:NORMAS:1058142464499793991>",
+            "emoji": "<:NORMA:1062068758287491193>",
             "title": "No está permitido hacer stream sniping",
             "subtitle": "El stream sniping está considerado como un tipo de trampa",
             "description": "Hacer stream sniping"
         },
         {
             "id": 15,
-            "emoji": "<:NORMAS:1058142464499793991>",
+            "emoji": "<:NORMA:1062068758287491193>",
             "title": "No está permitido el uso, distribución o venta de cualquier tipo de trampas",
             "subtitle": "Las trampas son un grave problema en el mundo de los videojuegos, por lo que no está permitido su uso, distribución o venta",
             "description": "Uso, distribución o venta de trampas"
         },
         {
             "id": 16,
-            "emoji": "<:NORMAS:1058142464499793991>",
+            "emoji": "<:NORMA:1062068758287491193>",
             "title": "No está permitido jugar conscientemente con personas que utilicen cualquier tipo de trampas",
             "subtitle": "",
             "description": "Jugar con personas que utilizan trampas"
         },
         {
             "id": 17,
-            "emoji": "<:NORMAS:1058142464499793991>",
-            "title": "No está permitida la compra, venta o intercambio de cuentas de Rainbow Six Siege en el servidor",
+            "emoji": "<:NORMA:1062068758287491193>",
+            "title": "No está permitida la compra, venta o intercambio de cuentas de Overwatch en el servidor",
             "subtitle": "La compra y venta de cuentas apoya a los hackers y trampas, por lo que no está permitido",
-            "description": "Compra, venta o intercambio de cuentas de Rainbow Six Siege en el servidor"
+            "description": "Compra, venta o intercambio de cuentas de Overwatch en el servidor"
         }
     ]
 }
