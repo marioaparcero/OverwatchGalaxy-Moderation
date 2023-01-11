@@ -14,7 +14,7 @@ module.exports = {
             (interaction.customId !== 'rule-select-temporary' && interaction.customId !== 'rule-select-permanent')
         ) return;
 
-        let rangePermission = 4; // 4 = Administrator - Staff, 3 = Admin - Moderator, 2 = Admin - Supervisor, 1 = Admin, 0 = None
+        let rangePermission = 5; // 5 = Administrator - Staff, 4 = Admin - Moderator, 3 = Admin - Organizador, 2 = Admin - CoAdmin, 1 = Admin, 0 = None
         if (!await checkPermissions(interaction.member._roles, rangePermission)) {
             interaction.reply({ content: 'No tienes permisos para utilizar esta herramienta', ephemeral: true })
             return;
@@ -30,11 +30,11 @@ module.exports = {
         switch (interaction.message.components[0].components[0].placeholder) {
             case 'LEVE':
                 interaction.message.edit({ components: [RuleSelectMenu('soft')] });
-                // let rangePermission = 4; // 4 = Administrator - Staff, 3 = Admin - Moderator, 2 = Admin - Supervisor, 1 = Admin, 0 = None
-                // if (!await checkPermissions(interaction.member._roles, rangePermission)) {
-                //     interaction.reply({ content: 'No tienes permisos para aplicar faltas leves', ephemeral: true })
-                //     return;
-                // }
+                rangePermission = 5; // 5 = Administrator - Staff, 4 = Admin - Moderator, 3 = Admin - Organizador, 2 = Admin - CoAdmin, 1 = Admin, 0 = None
+                if (!await checkPermissions(interaction.member._roles, rangePermission)) {
+                    interaction.reply({ content: 'No tienes permisos para aplicar faltas leves', ephemeral: true })
+                    return;
+                }
                 _selected_type = 'FALTA LEVE';
                 _approval = {
                     _title: 'SE APLICARÁ UNA FALTA',
@@ -45,11 +45,11 @@ module.exports = {
                 break;
             case 'GRAVE':
                 interaction.message.edit({ components: [RuleSelectMenu('serious')] });
-                // let rangePermission = 4; // 4 = Administrator - Staff, 3 = Admin - Moderator, 2 = Admin - Supervisor, 1 = Admin, 0 = None
-                // if (!await checkPermissions(interaction.member._roles, rangePermission)) {
-                //     interaction.reply({ content: 'No tienes permisos para aplicar faltas graves', ephemeral: true })
-                //     return;
-                // }
+                rangePermission = 4; // 5 = Administrator - Staff, 4 = Admin - Moderator, 3 = Admin - Organizador, 2 = Admin - CoAdmin, 1 = Admin, 0 = None
+                if (!await checkPermissions(interaction.member._roles, rangePermission)) {
+                    interaction.reply({ content: 'No tienes permisos para aplicar faltas graves', ephemeral: true })
+                    return;
+                }
                 _selected_type = 'FALTA GRAVE';
                 _approval = {
                     _title: 'SE APLICARÁ UNA FALTA',
@@ -60,11 +60,11 @@ module.exports = {
                 break;
             case 'TEMPORAL':
                 interaction.message.edit({ components: [RuleSelectMenu('temporary')] });
-                // let rangePermission = 4; // 4 = Administrator - Staff, 3 = Admin - Moderator, 2 = Admin - Supervisor, 1 = Admin, 0 = None
-                // if (!await checkPermissions(interaction.member._roles, rangePermission)) {
-                //     interaction.reply({ content: 'No tienes permisos para aplicar baneos temporales', ephemeral: true })
-                //     return;
-                // }
+                rangePermission = 3; // 5 = Administrator - Staff, 4 = Admin - Moderator, 3 = Admin - Organizador, 2 = Admin - CoAdmin, 1 = Admin, 0 = None
+                if (!await checkPermissions(interaction.member._roles, rangePermission)) {
+                    interaction.reply({ content: 'No tienes permisos para aplicar baneos temporales', ephemeral: true })
+                    return;
+                }
                 _selected_type = 'BAN TEMPORAL';
                 _approval = {
                     _title: 'SE APLICARÁ UN BAN',
@@ -75,11 +75,11 @@ module.exports = {
                 break;
             case 'PERMANENTE':
                 interaction.message.edit({ components: [RuleSelectMenu('permanent')] });
-                // let rangePermission = 4; // 4 = Administrator - Staff, 3 = Admin - Moderator, 2 = Admin - Supervisor, 1 = Admin, 0 = None
-                // if (!await checkPermissions(interaction.member._roles, rangePermission)) {
-                //     interaction.reply({ content: 'No tienes permisos para aplicar baneos permanentes', ephemeral: true })
-                //     return;
-                // }
+                rangePermission = 3; // 5 = Administrator - Staff, 4 = Admin - Moderator, 3 = Admin - Organizador, 2 = Admin - CoAdmin, 1 = Admin, 0 = None
+                if (!await checkPermissions(interaction.member._roles, rangePermission)) {
+                    interaction.reply({ content: 'No tienes permisos para aplicar baneos permanentes', ephemeral: true })
+                    return;
+                }
                 _selected_type = 'BAN PERMANENTE';
                 _approval = {
                     _title: 'SE APLICARÁ UN BAN',

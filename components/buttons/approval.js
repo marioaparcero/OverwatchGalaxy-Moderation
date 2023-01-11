@@ -26,7 +26,7 @@ const ApprovalButtons = (_punishment_type, _emoji, _label) => {
                 .setEmoji(`${_emoji}`)
                 .setStyle('Secondary'),
             new ButtonBuilder()
-                .setCustomId(`cancel-punuishment`)
+                .setCustomId(`cancel-punishment`)
                 .setLabel('Cancelar')
                 .setEmoji('<:CANCELAR_DANGER:1059188966416470207>')
                 .setStyle('Secondary'),

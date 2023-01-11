@@ -2,7 +2,7 @@ module.exports = {
     name: 'interactionCreate',
     async execute(interaction) {
         if (
-            (interaction.customId !== 'cancel-punuishment')
+            (interaction.customId !== 'cancel-punishment')
         ) return
 
         interaction.deferUpdate();

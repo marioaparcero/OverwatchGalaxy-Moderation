@@ -7,7 +7,7 @@ module.exports = {
     name: 'interactionCreate',
     async execute(interaction) {
         if (interaction.customId === 'revoke') {
-            let rangePermission = 4; // 4 = Administrator - Staff, 3 = Admin - Moderator, 2 = Admin - Supervisor, 1 = Admin, 0 = None
+            let rangePermission = 2; // 5 = Administrator - Staff, 4 = Admin - Moderator, 3 = Admin - Organizador, 2 = Admin - CoAdmin, 1 = Admin, 0 = None
             if (!await checkPermissions(interaction.member._roles, rangePermission)) {
                 interaction.reply({ content: 'No tienes permisos para revertir faltas o baneos', ephemeral: true })
                 return;

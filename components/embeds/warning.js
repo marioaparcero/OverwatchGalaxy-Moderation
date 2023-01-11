@@ -24,12 +24,12 @@ const WarningLogEmbed = async (_punishment, _punished, _punisher) => {
             { name: '`📑 Norma incumplida`', value: `> ${Rules[_punishment._rule_id - 1].title}` },
             { name: '`🆔 ID de advertencia`', value: `> ${_punishment._id}` },
         )
-    if (_punished._game_id != undefined && _punished._game_id != null) {
-        embed.addFields(
-            { name: '`🎮 ID de juego`', value: `> ${_punished._game_id}`, inline: true },
-            { name: '`🔍 R6 Tracker`', value: `> [${_punished._display_name}](https://r6.tracker.network/profile/uplay/${_punished._display_name}/)`, inline: true },
-        )
-    }
+    // if (_punished._game_id != undefined && _punished._game_id != null) {
+    //     embed.addFields(
+    //         { name: '`🎮 ID de juego`', value: `> ${_punished._game_id}`, inline: true },
+    //         { name: '`🔍 R6 Tracker`', value: `> [${_punished._display_name}](https://r6.tracker.network/profile/uplay/${_punished._display_name}/)`, inline: true },
+    //     )
+    // }
 
     return embed;
 

@@ -18,8 +18,9 @@ module.exports = {
             (interaction.customId !== 'approve-LEVE' && interaction.customId !== 'approve-GRAVE') &&
             (interaction.customId !== 'approve-TEMPORAL' && interaction.customId !== 'approve-PERMANENTE')
         ) return;
-
-        let rangePermission = 4; // 4 = Administrator - Staff, 3 = Admin - Moderator, 2 = Admin - Supervisor, 1 = Admin, 0 = None
+        
+        // Verificación con historial para aplicar baneos o faltas (Aceptar o Cancelar)
+        let rangePermission = 5; // 5 = Administrator - Staff, 4 = Admin - Moderator, 3 = Admin - Organizador, 2 = Admin - CoAdmin, 1 = Admin, 0 = None
         if (!await checkPermissions(interaction.member._roles, rangePermission)) {
             interaction.reply({ content: 'No tienes permisos para aprobar faltas o baneos', ephemeral: true })
             return;
@@ -150,7 +151,8 @@ module.exports = {
             try {
                 if (
                     !_punished_discord_user.roles.cache.has(Roles.Admin) &&
-                    !_punished_discord_user.roles.cache.has(Roles.Supervisor) &&
+                    !_punished_discord_user.roles.cache.has(Roles.CoAdmin) &&
+                    !_punished_discord_user.roles.cache.has(Roles.Organizador) &&
                     !_punished_discord_user.roles.cache.has(Roles.Moderator) &&
                     !_punished_discord_user.roles.cache.has(Roles.Staff)
                 ) {
@@ -162,37 +164,6 @@ module.exports = {
                 return true;
             }
         }
-
-        // const punisherPermission = (_punishment) => {
-        //     let _permission = "NONE";
-        //     if (_punisher_discord_user.roles.cache.has(Roles.Admin)) {
-        //         _permission = "ADMIN";
-        //     }
-        //     else if (_punisher_discord_user.roles.cache.has(Roles.Supervisor)) {
-        //         _permission = "SUPERVISOR";
-        //     }
-        //     else if (_punisher_discord_user.roles.cache.has(Roles.Moderator)) {
-        //         _permission = "MODERATOR";
-        //     }
-        //     else if (_punisher_discord_user.roles.cache.has(Roles.Staff)) {
-        //         _permission = "STAFF";
-        //     }
-
-        //     if (_permission === "NONE") {
-        //         return false;
-        //     }
-        //     if (_punishment._type === "LEVE") {
-        //         return true;
-        //     }
-        //     if (_punishment._type === "GRAVE" || _punishment._type === "TEMPORAL" || _punishment._type === "PERMANENTE") {
-        //         if (_permission === "ADMIN" || _permission === "SUPERVISOR" || _permission === "MODERATOR") {
-        //             return true;
-        //         } else {
-        //             return false;
-        //         }
-        //     }
-        // }
-
 
         // Checks what type of warning is being set (soft) || (serious) then is setting the type  and the log channel where the embeded message will be sent.
         switch (interaction.customId) {

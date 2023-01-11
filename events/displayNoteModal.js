@@ -9,7 +9,7 @@ module.exports = {
             (interaction.customId !== 'add-note')
         ) return
 
-        let rangePermission = 4; // 4 = Administrator - Staff, 3 = Admin - Moderator, 2 = Admin - Supervisor, 1 = Admin, 0 = None
+        let rangePermission = 5; // 5 = Administrator - Staff, 4 = Admin - Moderator, 3 = Admin - Organizador, 2 = Admin - CoAdmin, 1 = Admin, 0 = None
         if (!await checkPermissions(interaction.member._roles, rangePermission)) {
             interaction.reply({ content: 'No tienes permisos para añadir notas', ephemeral: true })
             return;
